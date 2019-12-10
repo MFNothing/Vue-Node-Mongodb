@@ -4,34 +4,50 @@ module.exports = app => {
     const router = express.Router({
         mergeParams: true
     })
-    // 引用导出的model进行数据库操作
-    const Category = require('../../models/Category')
     router.post('/', async (req, res) => {
-        const model = await Category.create(req.body)
+        const model = await req.Model.create(req.body)
         res.send(model)
     })
     router.put('/:id', async (req, res) => {
-        const model = await Category.findByIdAndUpdate(req.params.id, req.body)
+        const model = await req.Model.findByIdAndUpdate(req.params.id, req.body)
         res.send(model)
     })
     router.delete('/:id', async (req, res) => {
-        await Category.findByIdAndDelete(req.params.id)
+        await req.Model.findByIdAndDelete(req.params.id)
         res.send({
             success: true
         })
     })
     router.get('/', async (req, res) => {
         // populate 如果字段中有关联字段（ref）的话，就把它查出来，而不是只是它的值
-        const items = await Category.find().populate('parent').limit(10)
+        // const items = await req.Model.find().populate('parent').limit(10)
+        // 由于上面的不够通用，所以还可以用下面的处理，效果一样
+        const queryOptions = {}
+        // 当model的类型等于Category，才做特殊处理，这样就更通用
+        if (req.Model.modelName === 'Category') { 
+            queryOptions.populate = 'parent'
+        }
+        const items = await req.Model.find().setOptions(queryOptions).limit(10)
         res.send(items)
     })
     router.get('/:id', async (req, res) => {
-        const model = await Category.findById(req.params.id)
+        const model = await req.Model.findById(req.params.id)
         res.send(model)
     })
+
+    // 下面的第二个参数传入一个function，相当于中间件，多做一个处理，当这个处理完后再给router处理
+    // 实际上，上面的所有 (req, res) => {} 都可以增加next参数，但是由于他们已经是最后一个了，所以就省略了
+    app.use('/admin/api/rest/:resource', (req, res, next) => {
+        // next方法表示，交给后面的router处理
+        const modelName = require('inflection').classify(req.params.resource)
+        // 引用导出的model进行数据库操作，并添加到req对象里面，传递给后续处理的函数
+        req.Model = require(`../../models/${modelName}`)
+        next()
+    } ,router)
+}
+
+
     // router.get('/dosomething', async (req, res) => {
     //     // 可以通过下面的链接，请求都这里
     //     console.log('http://localhost:3000/admin/api/dosomething?xxx=1')
     // })
-    app.use('/admin/api/rest/:resource', router)
-}

@@ -45,7 +45,7 @@
 * 新建routers文件夹，用于保存不同的路由
 * 新建plugins文件夹，用于存储db文件
 * 新建models文件夹，用于存储模型
-* 安装 inflection，用于转换单词，变首字母大写单数的形式
+* 安装 inflection，用于转换单词，变首字母大写单数的形式 `npm i inflection --save`
 
 
 ## mongodb 安装
