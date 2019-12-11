@@ -4,7 +4,11 @@
     <el-table :data="items">
       <el-table-column prop="_id" label="ID" width="230"></el-table-column>
       <el-table-column prop="name" label="物品名称"></el-table-column>
-      <el-table-column prop="icon" label="物品图片"></el-table-column>
+      <el-table-column prop="icon" label="图标">
+        <template slot-scope="scope">
+          <img :src="scope.row.icon" style="height: 3rem" />
+        </template>
+      </el-table-column>
       <el-table-column fixed="right" label="操作" width="180">
         <template slot-scope="scope">
           <!-- 注意跳转链接开头不加/，表示不是从根目录进入 -->

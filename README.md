@@ -46,6 +46,7 @@
 * 新建plugins文件夹，用于存储db文件
 * 新建models文件夹，用于存储模型
 * 安装 inflection，用于转换单词，变首字母大写单数的形式 `npm i inflection --save`
+* 安装 multer 用于处理上传数据， `npm i multer --save`
 
 
 ## mongodb 安装
