@@ -16,6 +16,7 @@
 * 安装插件 `vue add element` 和 `vue add router`
 * 安装网络请求库 `npm i axios`
 * eslint 检查去掉 console 和 debugger，在package.json 中 eslintConfig 中 rules 中添加
+* 安装富文本编辑库 `npm install vue2-editor`
 
 ```
 "eslintConfig": {
