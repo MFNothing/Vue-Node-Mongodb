@@ -54,6 +54,33 @@ module.exports = app => {
         file.url = `http://localhost:3000/uploads/${file.filename}`
         res.send(file)
     })
+
+    // 登录接口
+    app.post('/admin/api/login', async(req, res) => {
+        const {username, password} = req.body
+        // 1. 根据用户名找用户
+        const AdminUser = require('../../models/AdminUser')
+        // 由于默认是不取password的，所以需要单独取出它
+        const user = await AdminUser.findOne({username}).select('+password')
+        if (!user) {
+            return res.status(422).send({
+                message: '用户名不存在'
+            })
+        }
+        // 2. 校验密码
+        // 还是使用 bcrypt 来校验
+        const isValid = require('bcrypt').compareSync(password, user.password)
+        if (!isValid) {
+            return res.status(422).send({
+                message: '密码错误'
+            })
+        }
+        // 3. 返回token
+        const jwt = require('jsonwebtoken')
+        // 第二个参数的秘钥，用于防止客户端串改数据，用于校验的
+        const token = jwt.sign({id: user._id}, app.get('secret'))
+        return res.send({token})
+    })
 }
 
 

@@ -2,6 +2,9 @@ const express = require('express')
 
 const app = express()
 
+// 设置秘钥的环境变量
+app.set('secret', 'kjlhasdfqweoriuaasldfkj')
+
 // 使用跨域
 app.use(require('cors')())
 // 使用json

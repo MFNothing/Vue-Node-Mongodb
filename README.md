@@ -48,6 +48,8 @@
 * 新建models文件夹，用于存储模型
 * 安装 inflection，用于转换单词，变首字母大写单数的形式 `npm i inflection --save`
 * 安装 multer 用于处理上传数据， `npm i multer --save`
+* 安装 bcrypt 用于处理密码散列加密， `npm i bcrypt --save`
+* 安装 jsonwebtoken 用于登录token验证的 `npm i jsonwebtoken --save`
 
 
 ## mongodb 安装
