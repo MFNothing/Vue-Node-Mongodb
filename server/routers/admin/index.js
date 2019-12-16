@@ -21,16 +21,8 @@ module.exports = app => {
             success: true
         })
     })
-    router.get('/', async (req, res, next) => {
-        const token = String(req.headers.authorization || '').split(' ').pop()
-        assert(token, 401, '请提供jwt token')
-        const {id = ''} = jwt.verify(token, app.get('secret'))
-        assert(id, 401, '无效的jwt token')
-        const user = await AdminUser.findById(id)
-        req.user = user
-        assert(req.user, 401, '请先登录')
-        await next()
-    },async (req, res) => {
+
+    router.get('/', async (req, res) => {
         // populate 如果字段中有关联字段（ref）的话，就把它查出来，而不是只是它的值
         // const items = await req.Model.find().populate('parent').limit(10)
         // 由于上面的不够通用，所以还可以用下面的处理，效果一样
@@ -47,21 +39,31 @@ module.exports = app => {
         res.send(model)
     })
 
+    // auth 校验的中间件
+    // const authMiddleware = async (req, res, next) => {
+    //     const token = String(req.headers.authorization || '').split(' ').pop()
+    //     assert(token, 401, '请提供jwt token')
+    //     const {id = ''} = jwt.verify(token, app.get('secret'))
+    //     assert(id, 401, '无效的jwt token')
+    //     const user = await AdminUser.findById(id)
+    //     req.user = user
+    //     assert(req.user, 401, '请先登录')
+    //     await next()
+    // }
+    // 这里把上面的内容封装到middleware的auth文件夹中，便于管理
+    const authMiddleware = require('../../middleware/auth')
+
+    const resourceMiddleware = require('../../middleware/resource')
+
     // 下面的第二个参数传入一个function，相当于中间件，多做一个处理，当这个处理完后再给router处理
     // 实际上，上面的所有 (req, res) => {} 都可以增加next参数，但是由于他们已经是最后一个了，所以就省略了
-    app.use('/admin/api/rest/:resource', (req, res, next) => {
-        // next方法表示，交给后面的router处理
-        const modelName = require('inflection').classify(req.params.resource)
-        // 引用导出的model进行数据库操作，并添加到req对象里面，传递给后续处理的函数
-        req.Model = require(`../../models/${modelName}`)
-        next()
-    } ,router)
+    app.use('/admin/api/rest/:resource', authMiddleware(), resourceMiddleware(), router)
 
     // 文件上传
     const multer = require('multer')
     // 新增中间件upload，接受文件
     const upload = multer({dest: __dirname + '/../../uploads'})
-    app.post('/admin/api/upload', upload.single('file'),async(req, res) => {
+    app.post('/admin/api/upload', authMiddleware(), upload.single('file'),async(req, res) => {
         const file = req.file
         file.url = `http://localhost:3000/uploads/${file.filename}`
         res.send(file)

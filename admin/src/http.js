@@ -23,7 +23,7 @@ http.interceptors.response.use(res => {
     return res
 }, err => {
     // 用的是element的显示消息的方法，它是被绑定在Vue的prototype上的，所以可以这样用，跟我们把$http绑定在prototype一样
-    if (err.response.data.message) {
+    if (err.response && err.response.data && err.response.data.message) {
         Vue.prototype.$message({
             message: err.response.data.message,
             type: 'error'
