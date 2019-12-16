@@ -99,7 +99,7 @@ module.exports = app => {
 
     // 错误处理函数，还是相当于一个中间件
     app.use(async (err, req, res, next) => {
-        res.status(err.status).send({
+        res.status(err.status || 500).send({
             message: err.message
         })
     })
