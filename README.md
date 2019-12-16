@@ -50,6 +50,7 @@
 * 安装 multer 用于处理上传数据， `npm i multer --save`
 * 安装 bcrypt 用于处理密码散列加密， `npm i bcrypt --save`
 * 安装 jsonwebtoken 用于登录token验证的 `npm i jsonwebtoken --save`
+* 安装 http-assert 用于请求异常情况 `npm i http-assert --save`
 
 
 ## mongodb 安装
