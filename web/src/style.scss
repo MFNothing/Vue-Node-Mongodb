@@ -107,3 +107,17 @@ $flex-ai: (
     }
 }
 
+.flex-1 {
+    flex: 1;
+}
+/*
+    这里提及一下 flex-basis 和 flex-grow 和 flex-shrink
+    flex-basis 默认为 auto，如果设置了值，会覆盖样式中的伸展方向的值，如果是row，则关联的是width，column是height
+    flex-grow 会去填满未填满父容器空间的空间，然后多个子项会根据这个值，等比去分
+    比如剩余100px宽度可以填充，有三个子项，值为 2， 3， 5，他们各自分得的额外的宽度为 20px， 30px， 和 50px
+    flex-shrink 会去
+*/
+.flex-grow-1 {
+    flex-grow: 1;
+}
+
