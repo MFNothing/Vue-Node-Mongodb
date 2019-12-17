@@ -53,6 +53,17 @@
 * 安装 http-assert 用于请求异常情况 `npm i http-assert --save`
 
 
+## web 安装
+
+* 安装 sass 和 sass-loader `npm i -D sass sass-loader`
+  * loader 用于对模块的源代码进行转换。loader 可以使你在 import 或"加载"模块时预处理文件。因此，loader 类似于其他构建工具中“任务(task)”，并提供了处理前端构建步骤的强大方法。loader 可以将文件从不同的语言（如 TypeScript）转换为 JavaScript，或将内联图像转换为 data URL。loader 甚至允许你直接在 JavaScript 模块中 import CSS文件！
+* `npm i -D` 相当于 `npm install --save-dev` 加入到 devDependencies 对象
+* `npm i -s` 相当于 `npm install --save` 加入到dependencies 对象
+* 安装 px to rem 插件，使用 按住 alt + z，配置转换字体大小，需要到设置-搜索-px to rem 然后设置它的转换的基础字体大小
+
+
+
+
 ## mongodb 安装
 
 * 从官网下载下来 https://www.mongodb.com/download-center/community
@@ -64,3 +75,4 @@
 * 根目录下（新建终端）创建 `/data/db/` 文件夹，不然运行会报错 `sudo mkdir -p /data/db/`
 * 然后修改目录权限，默认为只读，会报错 `sudo chown -R lym /data`，lym是我本机的用户名
 * 执行 `mongod` 启动数据库
+

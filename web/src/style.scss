@@ -1,0 +1,109 @@
+// 重置，统一盒模型边距默认样式
+
+* {
+    box-sizing: border-box;
+    outline: none;
+}
+
+html {
+    // 用rem的话，基础 1rem大小
+    font-size: 13px;
+}
+
+
+body {
+    margin: 0;
+    // Arial 所有电脑上都有 Helvetica 苹果上的字体 sans-serif 非衬线字体
+    // 这里表示先用 Arial ，没有就用 Helvetica， 再者用 sans-serif
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.2rem;
+    background-color: #f1f1f1;
+}
+
+
+a {
+    color: #999;
+}
+
+
+// color 
+$colors: (
+    'primary': #db9e3f,
+    'white': #fff,
+    'light': #f9f9f9,
+    'gray': #999,
+    'dark-1': #333,
+    'dark': #222,
+    'black': #000,
+);
+
+// 遍历对象
+@each $colorKey, $color in $colors {
+    .text-#{$colorKey} {
+        color: $color
+    };
+
+    .bg-#{$colorKey} {
+        background-color: $color;
+    }
+}
+
+// text align
+// 遍历数组
+@each $var in (left, center, right) {
+    .text-#{$var} {
+        text-align: $var;
+    };
+}
+
+// font size 
+// 安装 px to rem 插件，使用 按住 alt + z，配置转换字体大小，需要到设置-搜索-px to rem 然后设置它的转换的基础字体大小
+$base-font-size: 1rem;
+$font-sizes: (
+    xs: 0.7692rem, // 10px
+    sm: 0.9231rem, // 12px
+    md: 1rem, // 13px
+    lg: 1.0769rem, // 14px
+    xl: 1.2308rem // 16px
+);
+
+@each $sizeKey, $size in $font-sizes {
+    .fs-#{$sizeKey} {
+        font-size: $size;
+    };
+}
+
+// flex 布局
+.d-flex {
+    display: flex;
+}
+
+
+// 对齐方式
+$flex-jc: (
+    start: flex-start,
+    end: flex-end,
+    center: center,
+    between: space-between,
+    around: space-around
+);
+
+@each $key, $value in $flex-jc {
+    .jc-#{$key} {
+        justify-content: $value;
+    }
+}
+
+$flex-ai: (
+    start: flex-start,
+    end: flex-end,
+    center: center,
+    stretch: stretch
+);
+
+@each $key, $value in $flex-ai {
+    .ai-#{$key} {
+        align-items: $value;
+    }
+}
+
