@@ -1,0 +1,148 @@
+@import './variables';
+
+// 重置，统一盒模型边距默认样式
+
+* {
+  box-sizing: border-box;
+  outline: none;
+}
+
+html {
+  // 用rem的话，基础 1rem大小
+  font-size: 13px;
+}
+
+body {
+  margin: 0;
+  // Arial 所有电脑上都有 Helvetica 苹果上的字体 sans-serif 非衬线字体
+  // 这里表示先用 Arial ，没有就用 Helvetica， 再者用 sans-serif
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.2rem;
+  background-color: #f1f1f1;
+}
+
+a {
+  color: #999;
+}
+
+// 遍历对象
+@each $colorKey, $color in $colors {
+  .text-#{$colorKey} {
+    color: $color;
+  }
+
+  .bg-#{$colorKey} {
+    background-color: $color;
+  }
+}
+
+// text align
+// 遍历数组
+@each $var in (left, center, right) {
+  .text-#{$var} {
+    text-align: $var !important;
+  }
+}
+
+@each $sizeKey, $size in $font-sizes {
+  .fs-#{$sizeKey} {
+    font-size: $size * $base-font-size;
+  }
+}
+
+// flex 布局
+.d-flex {
+  display: flex;
+}
+
+@each $key, $value in $flex-jc {
+  .jc-#{$key} {
+    justify-content: $value;
+  }
+}
+
+
+@each $key, $value in $flex-ai {
+  .ai-#{$key} {
+    align-items: $value;
+  }
+}
+
+.flex-1 {
+  flex: 1;
+}
+/*
+    这里提及一下 flex-basis 和 flex-grow 和 flex-shrink
+    flex-basis 默认为 auto，如果设置了值，会覆盖样式中的伸展方向的值，如果是row，则关联的是width，column是height
+    flex-grow 会去填满未填满父容器空间的空间，然后多个子项会根据这个值，等比去分，未设置的子项默认为0
+    比如剩余100px宽度可以填充，有三个子项，值为 2， 3， 5，他们各自分得的额外的宽度为 20px， 30px， 和 50px
+    flex-shrink 会去减少子项的空间，如果各个子项的加起来超过父容器的大小，多出的部分，会根据这个值，等比分
+    为设置的子项，默认为1
+    比如多出100px需要压缩，有三个子项占用的尺寸，150px，200px，300px，值为未设置（1），4，5，
+    他们各自需要承担的就是(150 * 1)/(150 * 1 + 200 * 4 + 300 * 5) * 100、(200 * 4)/(150 * 1 + 200 * 4 + 300 * 5) * 100、(300 * 5)/(150 * 1 + 200 * 4 + 300 * 5) * 100 
+*/
+.flex-grow-1 {
+  flex-grow: 1;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+@each $typeKey, $type in $spacing-types {
+  // mt-1 形式的
+  @each $directionKey, $direction in $spacing-directions {
+    @each $sizeKey, $size in $spacing-sizes {
+      .#{$typeKey}#{$directionKey}-#{$sizeKey} {
+        #{$type}-#{$direction}: $size * $spacing-base-size;
+      }
+    }
+  }
+  // m-1 形式的
+  // mx-1 形式的 x表示水平方向的 left right
+  // my-1 形式的 y表示垂直方向的 top bottom
+  @each $sizeKey, $size in $spacing-sizes {
+    .#{$typeKey}-#{$sizeKey} {
+      #{$type}: $size * $spacing-base-size;
+    }
+    .#{$typeKey}x-#{$sizeKey} {
+      #{$type}-left: $size * $spacing-base-size;
+      #{$type}-right: $size * $spacing-base-size;
+    }
+
+    .#{$typeKey}y-#{$sizeKey} {
+      #{$type}-top: $size * $spacing-base-size;
+      #{$type}-bottom: $size * $spacing-base-size;
+    }
+  }
+}
+
+// button
+
+.btn {
+  border: none;
+  border-radius: 0.1538rem;
+  font-size: map-get($map: $font-sizes, $key: 'sm') * $base-font-size;
+  padding: 0.2rem 0.6rem;
+}
+
+.nav {
+    .nav-item {
+        border-bottom: 3px solid transparent;
+        padding-bottom: 0.2rem;
+        &.active { // & 表示上层本身
+            border-bottom: 3px solid #fff;
+        }
+    }
+    
+}
+
+// width, height
+
+.w-100 {
+    width: 100%;
+}
+
+.h-100 {
+    height: 100%;
+}

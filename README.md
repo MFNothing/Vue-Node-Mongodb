@@ -60,6 +60,8 @@
 * `npm i -D` 相当于 `npm install --save-dev` 加入到 devDependencies 对象
 * `npm i -s` 相当于 `npm install --save` 加入到dependencies 对象
 * 安装 px to rem 插件，使用 按住 alt + z，配置转换字体大小，需要到设置-搜索-px to rem 然后设置它的转换的基础字体大小
+* 安装 router ， `vue add router` (Requires proper server setup for index fallback in production) 选择no
+* 安装 `vue-awesome-swiper` 幻灯片，`npm install vue-awesome-swiper --save`
 
 
 
