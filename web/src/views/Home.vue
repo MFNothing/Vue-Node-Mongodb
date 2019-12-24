@@ -16,6 +16,7 @@
         <!-- 幻灯片结束 -->
         <!-- 图片导航 精灵图 -->
         <!-- 单色适合用iconfont 多色可以用精灵图片，但是精灵图片不好定位 -->
+        <!-- 字体图标可以改变大小和颜色，精灵图不可以，颜色是多少就是多少，大小也不好变化 -->
         <div class="nav-icons bg-white mt-3 text-center pt-3 text-dark-1"> 
             <div class="d-flex flex-wrap">
                 <div class="nav-item mb-3"
@@ -30,6 +31,53 @@
             </div>
         </div>
         <!-- 图片导航 精灵图 结束-->
+        <!-- card -->
+        <m-card icon="icon-menu" title="新闻资讯">
+            <div class="nav jc-between">
+                <div class="nav-item active">
+                    <div class="nav-link">热门</div>
+                </div>
+                <div class="nav-item">
+                    <div class="nav-link">新闻</div>
+                </div>
+                <div class="nav-item">
+                    <div class="nav-link">公告</div>
+                </div>
+                <div class="nav-item">
+                    <div class="nav-link">活动</div>
+                </div>
+                <div class="nav-item">
+                    <div class="nav-link">赛事</div>
+                </div>
+            </div>
+             <div class="pt-3">
+                <swiper>
+                    <swiper-slide v-for="x in 5" :key="x">
+                        <div class="pt-2"
+                        v-for="n in 5" :key="n">
+                            <span>新闻</span>
+                            <span>|</span>
+                            <span>夏日新版本“稷下星之队”即将6月上线</span>
+                            <span>12-02</span>
+                        </div>
+                    </swiper-slide>
+                </swiper>
+            </div>
+        </m-card>
+        <m-list-card icon="icon-menu" title="新闻资讯" :categories="newsCats">
+            <template #items="{category}" >
+                <div class="pt-2"
+                v-for="(news, index) in category.newsList" :key="index">
+                    <span>{{news.categoryName}}</span>
+                    <span>|</span>
+                    <span>{{news.title}}</span>
+                    <span>{{news.date}}</span>
+                </div>
+            </template>
+        </m-list-card>
+        <!-- card end -->
+        <!-- 字体图标 默认font-family为iconfont，如果需要修改需要到iconfont网站里面的项目中修改-->
+        <!-- <i class="iconfont icon-menu"/> -->
     </div>
 </template>
 
@@ -45,7 +93,47 @@ export default {
               pagination: {
                   el: '.swiper-pagination'
               }
-          }
+          },
+          newsCats: [{
+              name: '热门',
+              newsList: new Array(5).fill(1).map(() => ({
+                      categoryName: '公告',
+                      title: '12月19日体验服停机更新公告',
+                      date: '12/19'
+                  }))
+          },
+          {
+              name: '新闻',
+              newsList: new Array(5).fill(1).map(() => ({
+                      categoryName: '公告',
+                      title: '12月19日体验服停机更新公告',
+                      date: '12/19'
+                  }))
+          },
+          {
+              name: '公告',
+              newsList: new Array(5).fill(1).map(() => ({
+                      categoryName: '公告',
+                      title: '12月19日体验服停机更新公告',
+                      date: '12/19'
+                  }))
+          },
+          {
+              name: '活动',
+              newsList: new Array(5).fill(1).map(() => ({
+                      categoryName: '公告',
+                      title: '12月19日体验服停机更新公告',
+                      date: '12/19'
+                  }))
+          },
+          {
+              name: '赛事',
+              newsList: new Array(5).fill(1).map(() => ({
+                      categoryName: '公告',
+                      title: '12月19日体验服停机更新公告',
+                      date: '12/19'
+                  }))
+          }]
       }
   }
 }

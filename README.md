@@ -51,6 +51,7 @@
 * 安装 bcrypt 用于处理密码散列加密， `npm i bcrypt --save`
 * 安装 jsonwebtoken 用于登录token验证的 `npm i jsonwebtoken --save`
 * 安装 http-assert 用于请求异常情况 `npm i http-assert --save`
+* 安装 require-all 用于将某个文件夹下面的模块引用进来 `npm i require-all --save`
 
 
 ## web 安装
@@ -62,6 +63,7 @@
 * 安装 px to rem 插件，使用 按住 alt + z，配置转换字体大小，需要到设置-搜索-px to rem 然后设置它的转换的基础字体大小
 * 安装 router ， `vue add router` (Requires proper server setup for index fallback in production) 选择no
 * 安装 `vue-awesome-swiper` 幻灯片，`npm install vue-awesome-swiper --save`
+* chorme 中可以使用这个`$$('.news_list .title').map(v => v.innerHTML)`获取到对应类名的内容
 
 
 

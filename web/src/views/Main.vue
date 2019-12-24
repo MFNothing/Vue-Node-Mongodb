@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="tabbar bg-black py-2 px-3 d-flex ai-center">
+        <div class="tapbar bg-black py-2 px-3 d-flex ai-center">
             <img src="../assets/logo.png" style="height: 2rem"/>
             <div class="pl-2 flex-grow-1">
                 <div class="text-white">王者荣耀</div>
@@ -9,7 +9,7 @@
             <button type="button" class="btn bg-primary" > 立即下载 </button>
         </div>
         <div class="bg-primary pt-3 pb-2">
-            <div class="nav d-flex text-white jc-around pb-1">
+            <div class="nav nav-inverse jc-around pb-1">
                 <div class="nav-item active">
                     <router-link class="nav-link" tag="div" to='/'>首页</router-link>
                 </div>
@@ -24,3 +24,12 @@
         <router-view></router-view>
     </div>
 </template>
+
+<style lang="scss">
+.tapbar {
+    // 吸顶效果
+    position: sticky;
+    top: 0;
+    z-index: 120;
+}
+</style>
