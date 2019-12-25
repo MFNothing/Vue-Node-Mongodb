@@ -9,6 +9,7 @@
           <img :src="scope.row.avatar" style="height: 3rem" />
         </template>
       </el-table-column>
+      <el-table-column prop="categories[0].name" label="种类"></el-table-column>
       <el-table-column fixed="right" label="操作" width="180">
         <template slot-scope="scope">
           <!-- 注意跳转链接开头不加/，表示不是从根目录进入 -->

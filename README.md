@@ -64,6 +64,8 @@
 * 安装 router ， `vue add router` (Requires proper server setup for index fallback in production) 选择no
 * 安装 `vue-awesome-swiper` 幻灯片，`npm install vue-awesome-swiper --save`
 * chorme 中可以使用这个`$$('.news_list .title').map(v => v.innerHTML)`获取到对应类名的内容
+* 安装 axios 用于网络请求 `npm i axios --save`
+* 安装 dayjs 用于处理时间 `npm i dayjs --save`
 
 
 

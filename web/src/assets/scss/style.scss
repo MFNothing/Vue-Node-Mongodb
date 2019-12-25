@@ -50,6 +50,14 @@ a {
   }
 }
 
+// text overflow 
+.text-ellipsis {
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 // flex 布局
 .d-flex {
   display: flex;
@@ -82,6 +90,10 @@ a {
 */
 .flex-grow-1 {
   flex-grow: 1;
+}
+
+.fd-column {
+  flex-direction: column;
 }
 
 .flex-wrap {

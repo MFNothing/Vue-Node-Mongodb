@@ -32,7 +32,76 @@
         </div>
         <!-- 图片导航 精灵图 结束-->
         <!-- card -->
-        <m-card icon="icon-menu" title="新闻资讯">
+        <m-list-card icon="icon-menu" title="新闻资讯" :categories="newsCats">
+            <template #items="{category}" >
+                <div class="pt-2 fs-lg d-flex"
+                v-for="(news, index) in category.newsList" :key="index">
+                    <span class="text-info">[{{news.categoryName}}]</span>
+                    <span class="px-2">|</span>
+                    <span class="flex-1 text-dark-1 text-ellipsis pr-2">{{news.title}}</span>
+                    <span class="text-gray">{{news.createdAt | date}}</span>
+                </div>
+            </template>
+        </m-list-card>
+        <m-list-card icon="icon-helmet-" title="英雄列表" :categories="heroCats">
+            <template #items="{category}" >
+                <div class="flex-wrap d-flex" style="margin: 0 -0.5rem;">
+                    <div class="fs-lg hero-container p-2" style="width: 20%;"
+                    v-for="(hero, index) in category.heroList" :key="index">
+                        <img class="hero-img" :src="hero.avatar" />
+                        <div class="pt-1">{{hero.name}}</div>
+                    </div>
+                </div>
+            </template>
+        </m-list-card>
+        <!-- card end -->
+        <!-- 字体图标 默认font-family为iconfont，如果需要修改需要到iconfont网站里面的项目中修改-->
+        <!-- <i class="iconfont icon-menu"/> -->
+    </div>
+</template>
+
+<script>
+// @ is an alias to /src
+// import HelloWorld from '@/components/HelloWorld.vue'
+import  dayjs from 'dayjs'
+export default {
+    name: 'home',
+    filters: {
+        date(val) {
+            return dayjs(val).format('MM/DD')
+        }
+    },
+    data() {
+        return {
+            swiperOption: {
+                pagination: {
+                    el: '.swiper-pagination'
+                }
+            },
+            newsCats: [],
+            heroCats: []
+        }
+    },
+    methods: {
+        async fetchNewsCats() {
+            const res = await this.$http.get('news/list')
+            this.newsCats = res.data || []
+        },
+        async fetchHeroCats() {
+            const res = await this.$http.get('heroes/list')
+            this.heroCats = res.data || []
+        }
+    },
+    created() {
+        this.fetchNewsCats()
+        this.fetchHeroCats()
+    },
+}
+</script>
+
+
+
+ <!-- <m-card icon="icon-menu" title="新闻资讯">
             <div class="nav jc-between">
                 <div class="nav-item active">
                     <div class="nav-link">热门</div>
@@ -63,81 +132,7 @@
                     </swiper-slide>
                 </swiper>
             </div>
-        </m-card>
-        <m-list-card icon="icon-menu" title="新闻资讯" :categories="newsCats">
-            <template #items="{category}" >
-                <div class="pt-2"
-                v-for="(news, index) in category.newsList" :key="index">
-                    <span>{{news.categoryName}}</span>
-                    <span>|</span>
-                    <span>{{news.title}}</span>
-                    <span>{{news.date}}</span>
-                </div>
-            </template>
-        </m-list-card>
-        <!-- card end -->
-        <!-- 字体图标 默认font-family为iconfont，如果需要修改需要到iconfont网站里面的项目中修改-->
-        <!-- <i class="iconfont icon-menu"/> -->
-    </div>
-</template>
-
-<script>
-// @ is an alias to /src
-// import HelloWorld from '@/components/HelloWorld.vue'
-
-export default {
-  name: 'home',
-  data() {
-      return {
-          swiperOption: {
-              pagination: {
-                  el: '.swiper-pagination'
-              }
-          },
-          newsCats: [{
-              name: '热门',
-              newsList: new Array(5).fill(1).map(() => ({
-                      categoryName: '公告',
-                      title: '12月19日体验服停机更新公告',
-                      date: '12/19'
-                  }))
-          },
-          {
-              name: '新闻',
-              newsList: new Array(5).fill(1).map(() => ({
-                      categoryName: '公告',
-                      title: '12月19日体验服停机更新公告',
-                      date: '12/19'
-                  }))
-          },
-          {
-              name: '公告',
-              newsList: new Array(5).fill(1).map(() => ({
-                      categoryName: '公告',
-                      title: '12月19日体验服停机更新公告',
-                      date: '12/19'
-                  }))
-          },
-          {
-              name: '活动',
-              newsList: new Array(5).fill(1).map(() => ({
-                      categoryName: '公告',
-                      title: '12月19日体验服停机更新公告',
-                      date: '12/19'
-                  }))
-          },
-          {
-              name: '赛事',
-              newsList: new Array(5).fill(1).map(() => ({
-                      categoryName: '公告',
-                      title: '12月19日体验服停机更新公告',
-                      date: '12/19'
-                  }))
-          }]
-      }
-  }
-}
-</script>
+        </m-card> -->
 
 
 <style lang="scss">
@@ -183,5 +178,13 @@ export default {
         height: 0.7692rem;
         background-position: 38.577% 52.076%;
     }
+}
+
+.hero-container {
+    width: 20%
+}
+
+.hero-img {
+    width: 100%;
 }
 </style>

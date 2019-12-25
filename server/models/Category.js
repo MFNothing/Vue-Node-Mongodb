@@ -14,5 +14,24 @@ const schema = new mongoose.Schema({
     parent: {type: mongoose.SchemaTypes.ObjectId, ref: 'Category'}
 })
 
-// 创建一个model并导出，这里的 Category 是表的名称
+// virtual 给定名称创建一个虚拟类型
+// 简单来说是申明一个children的虚拟类型，它是基于Category的parent来查找的
+// 当我们使用populate填充时，已知查到A项，会去查Category表中parent等于A项_id值的项，查到后放到A项的children字段里面
+schema.virtual('children', {
+    localField: '_id', // 本地键
+    foreignField: 'parent', // 外键
+    justOne: false,
+    ref: 'Category'
+})
+
+
+// 这里假如查到A项，当我们使用populate填充时，会去查Aritcle表中categories值等于A项中_id值的项，查到后放到A项的newsList字段里面
+schema.virtual('newsList', {
+    localField: '_id',
+    foreignField: 'categories', // 外键
+    justOne: false,
+    ref: 'Article'
+})
+
+// 创建一个model并导出，这里的 Category 是表的名称, 第三个参数表示集合名称，目前没写，默认是表明小写复数形式
 module.exports = mongoose.model('Category', schema)

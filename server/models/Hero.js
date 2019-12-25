@@ -29,4 +29,4 @@ const schema = new mongoose.Schema({
 })
 
 // 创建一个model并导出，这里的 Hero 是表的名称
-module.exports = mongoose.model('Hero', schema)
+module.exports = mongoose.model('Hero', schema, 'heroes')

@@ -30,8 +30,13 @@ module.exports = app => {
         // 当model的类型等于Category，才做特殊处理，这样就更通用
         if (req.Model.modelName === 'Category') { 
             queryOptions.populate = 'parent'
+        } else if (req.Model.modelName === 'Hero') {
+            queryOptions.populate = {
+                path: 'categories',
+                select: 'name -_id'
+            }
         }
-        const items = await req.Model.find().setOptions(queryOptions).limit(100)
+        const items = await req.Model.find().setOptions(queryOptions)
         res.send(items)
     })
     router.get('/:id', async (req, res) => {
