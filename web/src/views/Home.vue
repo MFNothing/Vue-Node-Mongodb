@@ -34,23 +34,29 @@
         <!-- card -->
         <m-list-card icon="icon-menu" title="新闻资讯" :categories="newsCats">
             <template #items="{category}" >
-                <div class="pt-2 fs-lg d-flex"
+                <router-link  
+                tag="div"
+                :to="`/articles/${news._id}`"
+                class="pt-2 fs-lg d-flex"
                 v-for="(news, index) in category.newsList" :key="index">
                     <span class="text-info">[{{news.categoryName}}]</span>
                     <span class="px-2">|</span>
                     <span class="flex-1 text-dark-1 text-ellipsis pr-2">{{news.title}}</span>
                     <span class="text-gray">{{news.createdAt | date}}</span>
-                </div>
+                </router-link>
             </template>
         </m-list-card>
         <m-list-card icon="icon-helmet-" title="英雄列表" :categories="heroCats">
             <template #items="{category}" >
                 <div class="flex-wrap d-flex" style="margin: 0 -0.5rem;">
-                    <div class="fs-lg hero-container p-2" style="width: 20%;"
+                    <router-link
+                    tag="div"
+                    :to="`/heroes/${hero._id}`"
+                    class="fs-lg hero-container p-2" style="width: 20%;"
                     v-for="(hero, index) in category.heroList" :key="index">
                         <img class="hero-img" :src="hero.avatar" />
                         <div class="pt-1">{{hero.name}}</div>
-                    </div>
+                    </router-link>
                 </div>
             </template>
         </m-list-card>

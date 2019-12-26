@@ -17,6 +17,14 @@
 * 安装网络请求库 `npm i axios`
 * eslint 检查去掉 console 和 debugger，在package.json 中 eslintConfig 中 rules 中添加
 * 安装富文本编辑库 `npm install vue2-editor`
+* 安装 serve 用于编译打包后的文件 `sudo npm i serve -g`
+* 打包 `npm run build`
+* 设置接口请求的环境变量，用于打包后的接口请求，打包之后会有 `process.env` 这个环境变量
+  * 必须以 VUE_APP 开头 `baseURL: process.env.VUE_APP_API_URL || '/admin/api'`
+  * 根文件夹下增加 `.env.development` 文件
+* 根路径下新增vue.config.js 文件，配置打包信息 `https://cli.vuejs.org/zh/config/#publicpath`
+  * 如打包后的文件访问路径
+  * 如打包后的文件存在哪里
 
 ```
 "eslintConfig": {
@@ -66,6 +74,12 @@
 * chorme 中可以使用这个`$$('.news_list .title').map(v => v.innerHTML)`获取到对应类名的内容
 * 安装 axios 用于网络请求 `npm i axios --save`
 * 安装 dayjs 用于处理时间 `npm i dayjs --save`
+* 设置接口请求的环境变量，用于打包后的接口请求，打包之后会有 `process.env` 这个环境变量
+  * 必须以 VUE_APP 开头 `baseURL: process.env.VUE_APP_API_URL || '/admin/api'`
+  * 根文件夹下增加 `.env.development` 文件
+* 根路径下新增vue.config.js 文件，配置打包信息 `https://cli.vuejs.org/zh/config/#publicpath`
+  * 如打包后的文件访问路径
+  * 如打包后的文件存在哪里
 
 
 
